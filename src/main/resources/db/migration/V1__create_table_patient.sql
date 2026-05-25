@@ -1,7 +1,7 @@
 CREATE TABLE patient (
-     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     email VARCHAR(255) NOT NULL,
-     phone VARCHAR(20),
-     created_at TIMESTAMP
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  cpf VARCHAR(255),
+  phone VARCHAR(255),
+  birth_date DATE
 );

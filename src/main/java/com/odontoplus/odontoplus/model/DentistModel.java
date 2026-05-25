@@ -3,7 +3,7 @@ package com.odontoplus.odontoplus.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "/dentist")
+@Table(name = "dentist")
 public class DentistModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,6 +14,9 @@ public class DentistModel {
     private String phone;
     private String email;
 
+    public  DentistModel(){
+
+    }
     public DentistModel(Long id, String name, String specialty, String cro, String phone, String email) {
         this.id = id;
         this.name = name;

@@ -17,13 +17,13 @@ public class DentistController {
         this.service = dentistService;
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<DentistModel>> list(){
     List<DentistModel> list = service.list();
     return ResponseEntity.ok(list);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<DentistModel> up(@RequestBody DentistModel dentistModel, @PathVariable Long id) {
         return service.findById(id)
                 .map(dentistExist -> {
@@ -33,13 +33,13 @@ public class DentistController {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<DentistModel> Create(@RequestBody DentistModel dentistModel){
         DentistModel save = service.save(dentistModel);
         return ResponseEntity.ok(save);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deletar/{id}")
     ResponseEntity<Void> excluir(Long id){
         service.excluir(id);
         return ResponseEntity.noContent().build();

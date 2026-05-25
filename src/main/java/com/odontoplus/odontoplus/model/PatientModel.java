@@ -1,12 +1,10 @@
 package com.odontoplus.odontoplus.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
+@Table(name = "patient")
 public class PatientModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +13,10 @@ public class PatientModel {
     private String cpf;
     private String phone;
     private LocalDate birthDate;
+
+    public PatientModel(){
+
+    }
 
     public PatientModel(long id, String name, String cpf, String phone, LocalDate birthDate) {
         this.id = id;

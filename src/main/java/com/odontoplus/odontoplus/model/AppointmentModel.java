@@ -1,19 +1,21 @@
 package com.odontoplus.odontoplus.model;
 
+import com.odontoplus.odontoplus.Enum.AppointmentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "/appointment")
+@Table(name = "appointment")
 public class AppointmentModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     private LocalDateTime appointment;
     private String description;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -23,7 +25,11 @@ public class AppointmentModel {
     @JoinColumn(name = "dentist_id")
     private DentistModel dentist;
 
-    public AppointmentModel(Long id, LocalDateTime appointment, String description, String status, PatientModel patient, DentistModel dentist) {
+    public AppointmentModel(){
+
+    }
+
+    public AppointmentModel(Long id, LocalDateTime appointment, String description, AppointmentStatus status, PatientModel patient, DentistModel dentist) {
         this.id = id;
         this.appointment = appointment;
         this.description = description;
@@ -56,11 +62,11 @@ public class AppointmentModel {
         this.description = description;
     }
 
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 

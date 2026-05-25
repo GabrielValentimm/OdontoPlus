@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/appointment")
 public class AppointmentController {
 
     private AppointmentService service;
 
     // Get
-    @GetMapping
+    @GetMapping("todos")
     public ResponseEntity<List<AppointmentModel>> list(){
         List<AppointmentModel> list = service.list();
         return ResponseEntity.ok(list);
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<AppointmentModel> up(@RequestBody AppointmentModel appointmentModel, @PathVariable Long id) {
         return service.findById(id)
                 .map(dentistExist -> {
@@ -33,12 +33,13 @@ public class AppointmentController {
     }
 
     // Post
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<AppointmentModel> create(@RequestBody AppointmentModel appointmentModel){
         AppointmentModel save = service.save(appointmentModel);
         return ResponseEntity.ok(save);
     }
 
+    @DeleteMapping("/deletar{id}")
     ResponseEntity<Void>excluir(Long id){
         service.excluir(id);
        return ResponseEntity.noContent().build();

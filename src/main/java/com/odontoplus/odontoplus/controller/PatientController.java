@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/patient")
 public class PatientController {
 
@@ -19,12 +20,12 @@ public class PatientController {
         this.service = patientService;
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<PatientModel>> list(PatientModel patientModel) {
         List<PatientModel> list = service.list();
         return ResponseEntity.ok(list);
     }
-    @PutMapping
+    @PutMapping("/atualizar/{id}")
    public ResponseEntity<PatientModel> up(@RequestBody PatientModel patientModel, @PathVariable Long Id){
         return service.findByID(Id)
                 .map(pacientxistent ->{
@@ -34,14 +35,14 @@ public class PatientController {
                 }) .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping
-    ResponseEntity<Void> excluir(Long id){
+    @DeleteMapping("/deletar/{id}")
+    ResponseEntity<Void> excluir(@PathVariable Long id){
     service.excluir(id);
     return ResponseEntity.noContent().build();
     }
 
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<PatientModel> create(@RequestBody PatientModel patientModel){
         PatientModel save = service.save(patientModel);
         return ResponseEntity.ok(save);
